@@ -1,0 +1,58 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2.0.0] - 2026-03-17
+
+### Added
+- **146 条规则** - 大幅扩展规则库
+- **20+ 行业覆盖** - 金融、医疗、汽车、销售、人力资源、物流等
+- **个人模式 (personal)** - 轻量化配置，自动脱敏
+- **规则分类统计** - 支持 `agent-dlp rules` 命令
+
+### Categories Added
+- 凭证密钥: 45 条 (OpenAI/GitHub/AWS/阿里云/微信等)
+- 金融: 19 条 (银行卡/股票/加密货币/工资)
+- 人力资源: 11 条 (工号/社保/公积金)
+- 物流: 11 条 (快递单/运单/地址)
+- 医疗: 10 条 (病历/医保/诊断)
+- 汽车: 6 条 (车架号/行驶证)
+- 销售: 6 条 (客户信息/订单)
+- 医药: 5 条 (处方/药品)
+- 法规: 4 条 (合同/专利)
+- 其他: 29 条
+
+### Changed
+- 性能优化 - 正则预编译
+- CLI 增强 - 新增 rules 命令
+- 配置简化 - 支持 personal 模式
+
+### Fixed
+- 修复部分规则匹配问题
+
+---
+
+## [1.0.0] - 2026-03-14
+
+### Added
+- 初始版本
+- 25 条基础规则
+- 入口防护 (Input Guard)
+- 记忆保护 (Memory Guard)
+- 工具管控 (Tool Guard)
+- 出口过滤 (Output Filter)
+- 审计日志 (Audit Logger)
+
+### Features
+- Prompt Injection 检测
+- 敏感信息检测 (身份证、手机、邮箱)
+- API Key 检测 (AWS/GitHub/Slack)
+- 危险工具审批
+
+---
+
+## [0.0.1] - 2026-03-10
+
+### Added
+- 项目初始化
+- 基础 DLP 框架

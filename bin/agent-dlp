@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""
+Agent Security DLP CLI
+"""
+
+import sys
+import os
+
+# 添加lib路径
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
+
+from agent_dlp import AgentDLP
+
+def main():
+    if len(sys.argv) < 2:
+        print("""
+🔒 Agent Security DLP - 企业级数据防泄漏系统
+
+用法:
+  agent-dlp status              查看状态
+  agent-dlp check <文本>        检查文本
+  agent-dlp check-input <文本> 检查入口
+  agent-dlp check-output <文本> 检查出口
+  agent-dlp check-tool <工具名> 检查工具
+  agent-dlp logs              查看日志
+  agent-dlp rules             查看规则统计
+  agent-dlp help              帮助
+""")
+        return
+    
+    command = sys.argv[1]
+    dlp = AgentDLP()
+    
+    if command == "status":
+        status = dlp.get_status()
+        print("\n🔒 Agent Security DLP 状态:\n")
+        for k, v in status.items():
+            print(f"  {k}: {v}")
+        print()
+    
+    elif command == "rules":
+        from agent_dlp import DLPRules
+        rules = DLPRules()
+        
+        # 分类统计
+        categories = {}
+        for name, rule in rules.RULES.items():
+            cat = rule.get('category', 'other')
+            categories[cat] = categories.get(cat, 0) + 1
+        
+        print(f"\n📊 规则统计 (共 {len(rules.RULES)} 条):\n")
+        for cat, count in sorted(categories.items(), key=lambda x: -x[1]):
+            print(f"  {cat}: {count}")
+        print()
+    
+    elif command == "help":
+        print("""
+🔒 Agent Security DLP - 企业级数据防泄漏系统
+
+命令:
+  status              查看状态
+  rules               查看规则统计
+  check <文本>        检查文本(DLP规则)
+  check-input <文本> 检查入口(Prompt注入)
+  check-output <文本> 检查出口(敏感信息)
+  check-tool <工具>  检查工具(危险工具)
+  logs                查看审计日志
+""")
+    
+    elif command == "check" and len(sys.argv) > 2:
+        text = " ".join(sys.argv[2:])
+        blocked, processed, details = dlp.check_output(text)
+        print(f"\n检查: {text[:50]}...")
+        print(f"拦截: {'是 ❌' if blocked else '否 ✅'}")
+        if details.get('findings'):
+            print("发现:")
+            for f in details['findings']:
+                print(f"  - {f['description']} ({f['severity']})")
+        print()
+    
+    elif command == "check-input" and len(sys.argv) > 2:
+        text = " ".join(sys.argv[2:])
+        result = dlp.check_input(text)
+        print(f"\n入口检查: {text[:50]}...")
+        print(f"注入检测: {'是 ❌' if result.get('injection_detected') else '否 ✅'}")
+        print(f"拦截: {'是 ❌' if result.get('blocked') else '否 ✅'}")
+        if result.get('findings'):
+            print(f"发现模式: {result['findings']}")
+        print()
+    
+    elif command == "check-output" and len(sys.argv) > 2:
+        text = " ".join(sys.argv[2:])
+        blocked, processed, details = dlp.check_output(text)
+        print(f"\n出口检查: {text[:50]}...")
+        print(f"拦截: {'是 ❌' if blocked else '否 ✅'}")
+        print(f"处理后: {processed[:100]}...")
+        if details.get('findings'):
+            print("发现:")
+            for f in details['findings']:
+                print(f"  - {f['description']} ({f['severity']})")
+        print()
+    
+    elif command == "check-tool" and len(sys.argv) > 2:
+        tool = sys.argv[2]
+        result = dlp.check_tool(tool)
+        print(f"\n工具检查: {tool}")
+        print(f"需要审批: {'是 ⚠️' if result.get('require_approval') else '否 ✅'}")
+        print(f"拦截: {'是 ❌' if result.get('blocked') else '否 ✅'}")
+        print()
+    
+    elif command == "logs":
+        logs = dlp.audit_logger.get_logs(20)
+        print(f"\n📋 最近 {len(logs)} 条日志:\n")
+        for log in logs:
+            print(f"[{log.get('timestamp', '')}] {log.get('type', '')}")
+        print()
+    
+    else:
+        print(f"未知命令: {command}")
+        print("输入 'agent-dlp help' 查看帮助")
+
+if __name__ == "__main__":
+    main()

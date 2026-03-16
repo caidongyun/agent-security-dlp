@@ -1,0 +1,41 @@
+{
+  "enabled": true,
+  "mode": "normal",
+  "input": {
+    "injection_detection": true,
+    "sensitive_input": true
+  },
+  "memory": {
+    "pollution_check": true,
+    "sensitive_filter": true
+  },
+  "tools": {
+    "dangerous": ["exec", "delete", "write", "rm", "format", "drop", "truncate", "shutdown", "restart"],
+    "approval_required": true
+  },
+  "output": {
+    "enabled": true,
+    "rules": [
+      "china_idcard", "china_phone", "china_passport", "china_driver_license", "china_hukou",
+      "ssn", "passport", "email",
+      "api_key", "aws_key", "aws_secret", "private_key", "github_token", "slack_token", "jwt_token", "azure_token",
+      "credit_card", "bank_account", "cvv",
+      "password", "secret_key",
+      "address", "name", "ip_address", "mac_address",
+      "openai_key", "claude_key", "google_ai_key", "anthropic_key",
+      "aliyun_access_key", "aliyun_secret", "tencent_cloud_key", "baidu_cloud_key", "huawei_cloud_key",
+      "baidu_map_key", "amap_key",
+      "wechat_appid", "wechat_secret", "wechat_mch_id", "alipay_appid",
+      "stripe_key", "stripe_webhook", "paypal_client_id",
+      "twilio_account_sid", "twilio_auth_token", "sendgrid_api_key", "mailgun_api_key",
+      "aws_s3_key", "digitalocean_token", "cloudflare_api_key",
+      "mongo_uri", "redis_password", "postgres_password",
+      "npm_token", "pypi_token", "dockerhub_token", "github_app_secret", "gitlab_token",
+      "notion_api_key", "linear_api_key", "slack_webhook", "slack_signing_secret"
+    ]
+  },
+  "audit": {
+    "enabled": true,
+    "log_file": "~/.openclaw/logs/dlp-audit.log"
+  }
+}
