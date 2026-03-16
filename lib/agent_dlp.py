@@ -308,6 +308,50 @@ class DLPRules:
             "category": "credential"
         },
         
+        # ========== 加密货币 ==========
+        "btc_address": {
+            "pattern": r"(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}",
+            "action": "block",
+            "severity": "critical",
+            "description": "比特币地址",
+            "category": "crypto"
+        },
+        "eth_address": {
+            "pattern": r"0x[a-fA-F0-9]{40}",
+            "action": "block",
+            "severity": "critical",
+            "description": "以太坊地址",
+            "category": "crypto"
+        },
+        "usdt_trc20": {
+            "pattern": r"T[A-HJ-NP-Z0-9]{33}",
+            "action": "block",
+            "severity": "critical",
+            "description": "USDT (TRC20) 地址",
+            "category": "crypto"
+        },
+        "usdt_erc20": {
+            "pattern": r"0x[a-fA-F0-9]{40}",
+            "action": "block",
+            "severity": "critical",
+            "description": "USDT (ERC20) 地址",
+            "category": "crypto"
+        },
+        "crypto_private_key": {
+            "pattern": r"-----BEGIN\s+(EC\s+)?PRIVATE\s+KEY-----",
+            "action": "block",
+            "severity": "critical",
+            "description": "加密货币私钥",
+            "category": "crypto"
+        },
+        "wallet_mnemonic": {
+            "pattern": r"(?i)(助记词|mnemonic|seed)\s*[:=]\s*[\w\s]{12,}",
+            "action": "block",
+            "severity": "critical",
+            "description": "钱包助记词",
+            "category": "crypto"
+        },
+        
         # ========== 通讯服务 ==========
         "twilio_account_sid": {
             "pattern": r"AC[a-z0-9]{32}",
@@ -1107,6 +1151,82 @@ class DLPRules:
             "severity": "medium",
             "description": "ETC/高速卡号",
             "category": "logistics"
+        },
+        
+        # ========== 中国政务 ==========
+        "social_credit_code": {
+            "pattern": r"[0-9A-HJ-NP-Z]{2}[0-9]{6}[0-9A-HJ-NP-Z]{10}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "统一社会信用代码",
+            "category": "government"
+        },
+        "org_code": {
+            "pattern": r"[0-9]{9}[A-Z]",
+            "action": "sanitize",
+            "severity": "medium",
+            "description": "组织机构代码",
+            "category": "government"
+        },
+        "tax_id": {
+            "pattern": r"[0-9]{15}|[0-9]{18}|[0-9]{20}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "税务登记号",
+            "category": "government"
+        },
+        "military_id": {
+            "pattern": r"[海陆空]军[\w]{8,}",
+            "action": "block",
+            "severity": "critical",
+            "description": "军官证号",
+            "category": "government"
+        },
+        
+        # ========== 国际证件 ==========
+        "us_passport": {
+            "pattern": r"[A-Z]\d{8,9}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "美国护照号",
+            "category": "intl_id"
+        },
+        "us_itin": {
+            "pattern": r"9\d{2}[-]?\d{2}[-]?\d{4}",
+            "action": "block",
+            "severity": "critical",
+            "description": "美国税号(ITIN)",
+            "category": "intl_id"
+        },
+        "hk_id": {
+            "pattern": r"[A-Z]{1,2}\d{6}\([A-Z]\)",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "香港身份证",
+            "category": "intl_id"
+        },
+        "tw_id": {
+            "pattern": r"[A-Z]\d{9}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "台湾身份证",
+            "category": "intl_id"
+        },
+        
+        # ========== 生物识别 ==========
+        "biometric_data": {
+            "pattern": r"(?i)(指纹|虹膜|面部|人脸)数据",
+            "action": "block",
+            "severity": "critical",
+            "description": "生物识别数据",
+            "category": "biometric"
+        },
+        "fingerprint": {
+            "pattern": r"(?i)指纹(特征|模板|数据)",
+            "action": "block",
+            "severity": "critical",
+            "description": "指纹数据",
+            "category": "biometric"
         },
         
         # ========== 金融信息 ==========

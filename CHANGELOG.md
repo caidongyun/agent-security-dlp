@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-03-17
+
+### Added
+- **162 条规则** - 新增 16 条
+- **加密货币**: 6 条 (BTC/ETH/USDT/私钥/助记词)
+- **中国政务**: 6 条 (社会信用代码/组织机构代码/税务登记号/军官证)
+- **国际证件**: 4 条 (美国护照/ITIN/香港/台湾身份证)
+- **生物识别**: 2 条 (指纹/虹膜/人脸数据)
+- **规则探索文档**: docs/RULE_EXPLORATION.md
+
+### Categories Added
+- crypto: 6 条
+- government: 6 条
+- intl_id: 4 条
+- biometric: 2 条
+
+---
+
 ## [2.0.0] - 2026-03-17
 
 ### Added
