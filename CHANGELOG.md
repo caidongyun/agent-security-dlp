@@ -2,29 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.2.0] - 2026-03-17
-
-### Added
-- **182 条规则** - 新增 20 条行业深化规则
-- **行业专用规则**: 金融科技、医疗健康、电商、制造业、政府
-- **自动迭代机制**: lib/rule_updater.py - 规则自动更新
-- **规则迭代器**: lib/rule_iteration.py - 自动循环迭代
-- **行业规则生成器**: lib/industry_rules.py - AI 辅助规则生成
-
-### Industry Rules Added
-- fintech: 5 条 (支付网关、交易信息)
-- healthcare: 5 条 (病历、处方)
-- ecommerce: 4 条 (店铺、订单)
-- manufacturing: 3 条 (生产、供应链)
-- government: 3 条 (政务、证件)
-
-### New Categories
-- fintech: 5
-- healthcare: 5
-- manufacturing: 3
-
----
-
 ## [2.1.0] - 2026-03-17
 
 ### Added
