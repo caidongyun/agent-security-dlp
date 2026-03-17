@@ -3,15 +3,15 @@ name: agent-security-dlp
 description: |
   Agent Security DLP - 企业级数据防泄漏系统
   功能: 入口防护、记忆保护、工具管控、出口过滤、审计日志
-  规则: 166条，覆盖金融、医疗、汽车、销售、人力资源、物流等25+行业
+  规则: 170条，覆盖金融、医疗、汽车、销售、人力资源、物流等25+行业
   触发: check-output(对话出口) / check-input(对话入口) / check-tool(工具执行)
   场景: 命令行 / Python集成 / 装饰器自动触发
 ---
 
 # Agent Security DLP
 
-> 版本: v2.1.1  
-> 规则: 166条  
+> 版本: v2.1.2  
+> 规则: 170条  
 > 状态: ✅ 可用
 
 ---
