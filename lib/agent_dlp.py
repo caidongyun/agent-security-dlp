@@ -55,6 +55,16 @@ class DLPConfig:
 class DLPRules:
     """DLP规则"""
     
+    # 预编译正则表达式缓存
+    _compiled_patterns = {}
+    
+    @classmethod
+    def get_compiled_pattern(cls, pattern: str):
+        """获取预编译的正则表达式"""
+        if pattern not in cls._compiled_patterns:
+            cls._compiled_patterns[pattern] = re.compile(pattern)
+        return cls._compiled_patterns[pattern]
+    
     RULES = {
         # ========== 中国PII ==========
         "china_idcard": {
@@ -1386,12 +1396,18 @@ class OutputFilter:
         enabled_rules = self.config.get("output.rules", [])
         findings = []
         
+        # 跳过短文本
+        if len(text) < 3:
+            return {"blocked": False, "sanitized": False, "findings": [], "text": text}
+        
         for rule_name in enabled_rules:
             rule = self.rules.get_rule(rule_name)
             if not rule:
                 continue
             
-            matches = re.findall(rule["pattern"], text)
+            # 使用预编译正则
+            pattern = self.rules.get_compiled_pattern(rule["pattern"])
+            matches = pattern.findall(text)
             if matches:
                 findings.append({
                     "rule": rule_name,

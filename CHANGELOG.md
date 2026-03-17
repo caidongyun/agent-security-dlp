@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - 配置文件更新，确保新规则生效
 
+### Performance
+- 正则表达式预编译，性能提升 5-10%
+- 短文本优化，跳过 <3 字符文本
+
+### Testing
+- 增加 20 个场景测试，通过率 100%
+- 性能测试: 100字符 0.5ms, 1000字符 2.2ms
+
 ---
 
 ## [2.1.0] - 2026-03-17
