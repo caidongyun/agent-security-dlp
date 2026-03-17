@@ -30,7 +30,15 @@ class DLPConfig:
         },
         "output": {
             "enabled": True,
-            "rules": ["china_idcard", "china_phone", "api_key", "password"],
+            "rules": ["china_idcard", "china_phone", 
+        "phone_dash_variant": {
+            "pattern": r"1[3-9]\d-\d{3,8}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "手机号(横线变体)",
+            "category": "auto_discovered"
+        },
+        "api_key", "password"],
         },
         "audit": {
             "enabled": True,
@@ -162,6 +170,14 @@ class DLPRules:
         },
         
         # ========== 密钥凭证 ==========
+        
+        "phone_dash_variant": {
+            "pattern": r"1[3-9]\d-\d{3,8}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "手机号(横线变体)",
+            "category": "auto_discovered"
+        },
         "api_key": {
             "pattern": r"(?i)(api[_-]?key|apikey|api-key)\s*[:=]\s*['\"]?([a-zA-Z0-9_-]{20,})",
             "action": "block",
@@ -1516,7 +1532,15 @@ class OutputFilter:
             # 凭证 - AI 服务
             "openai_key", "claude_key", "google_ai_key", "anthropic_key",
             # 凭证 - 云服务
-            "api_key", "aws_key", "aws_secret", "aws_s3_key",
+            
+        "phone_dash_variant": {
+            "pattern": r"1[3-9]\d-\d{3,8}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "手机号(横线变体)",
+            "category": "auto_discovered"
+        },
+        "api_key", "aws_key", "aws_secret", "aws_s3_key",
             "azure_token", "aliyun_access_key", "aliyun_secret", "tencent_cloud_key",
             "baidu_cloud_key", "huawei_cloud_key", "baidu_map_key", "amap_key",
             # 凭证 - 中国支付
