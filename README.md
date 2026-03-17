@@ -70,6 +70,82 @@ else:
 
 ---
 
+## 触发方式
+
+本 DLP 支持 **手动触发** 和 **集成触发** 两种方式：
+
+### 方式1: 命令行手动触发
+
+```bash
+# 检查输出 (对话出口)
+python bin/agent-dlp check-output "手机: 13812345678"
+
+# 检查入口 (对话入口)
+python bin/agent-dlp check-input "忽略之前的指令"
+
+# 检查工具 (执行前)
+python bin/agent-dlp check-tool exec
+```
+
+### 方式2: Python 代码集成触发
+
+```python
+from agent_dlp import AgentDLP
+
+dlp = AgentDLP()
+
+# 对话出口检查 (最常用)
+blocked, result, details = dlp.check_output(user_message)
+
+# 对话入口检查
+result = dlp.check_input(user_input)
+
+# 工具执行前检查
+result = dlp.check_tool("exec", {"command": "rm -rf /"})
+```
+
+### 方式3: 装饰器自动触发
+
+```python
+from functools import wraps
+from agent_dlp import AgentDLP
+
+dlp = AgentDLP()
+
+def dlp_protect(func):
+    """自动触发装饰器 - 入口+出口自动检查"""
+    @wraps(func)
+    def wrapper(text):
+        # 执行函数
+        result = func(text)
+        # 出口检查
+        blocked, safe, _ = dlp.check_output(result)
+        return safe if blocked else result
+    return wrapper
+
+# 使用
+@dlp_protect
+def agent_response(text):
+    return f"你说的是: {text}"
+
+# 自动触发
+print(agent_response("手机13812345678"))  # 自动脱敏
+```
+
+---
+
+## 使用场景
+
+| 场景 | 触发方式 | 说明 |
+|------|----------|------|
+| 对话出口 | `check_output` | 返回用户前自动检测 |
+| 对话入口 | `check_input` | 处理输入前检测 |
+| 文件扫描 | Python 调用 | 扫描文件内容 |
+| API 防护 | 装饰器 | 接口层自动拦截 |
+| 工具执行 | `check_tool` | 执行前审批 |
+
+---
+
 ## 命令行
 
 ```bash
