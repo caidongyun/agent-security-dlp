@@ -2,22 +2,22 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-v2.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/rules-146-green" alt="Rules">
+  <img src="https://img.shields.io/badge/rules-166-green" alt="Rules">
   <img src="https://img.shields.io/badge/python-3.8+-orange" alt="Python">
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
 </p>
 
-> 🛡️ 企业级数据防泄漏系统 | 146 条规则 | 覆盖 20+ 行业
+> 🛡️ 企业级数据防泄漏系统 | 166 条规则 | 覆盖 25+ 行业
 
 ---
 
 ## 简介
 
-Agent Security DLP (数据防泄漏系统) 是一个企业级的敏感信息检测与防护工具，支持 **146 条检测规则**，覆盖金融、医疗、汽车、销售、人力资源、物流等 20+ 行业场景。
+Agent Security DLP (数据防泄漏系统) 是一个企业级的敏感信息检测与防护工具，支持 **166 条检测规则**，覆盖金融、医疗、汽车、销售、人力资源、物流等 25+ 行业场景。
 
 ### 核心特性
 
-- 🚀 **146 条规则** - 覆盖 20+ 行业
+- 🚀 **166 条规则** - 覆盖 25+ 行业
 - 🛡️ **五层防护** - 入口、记忆、工具、出口、审计
 - ⚡ **高性能** - 正则预编译，并行检测
 - 🔧 **易扩展** - 支持自定义规则
@@ -106,7 +106,7 @@ python bin/agent-dlp logs
 | 📜 法规 | 4 | 合同、专利 |
 | 其他 | 29 | 教育、政府等 |
 
-**总计: 146 条**
+**总计: 166 条**
 
 ---
 
