@@ -81,6 +81,41 @@ class DLPRules:
             "description": "中国手机号",
             "category": "china_pii"
         },
+        "china_phone_dashed": {
+            "pattern": r"1[3-9]\d[-]?\d{4}[-]?\d{4}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "中国手机号(横线格式)",
+            "category": "china_pii"
+        },
+        "china_phone_spaced": {
+            "pattern": r"1[3-9]\d\s?\d{4}\s?\d{4}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "中国手机号(空格格式)",
+            "category": "china_pii"
+        },
+        "china_phone_underscore": {
+            "pattern": r"1[3-9]\d[_\s]?\d{3,5}[_\s]?\d{4}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "中国手机号(下划线格式)",
+            "category": "china_pii"
+        },
+        "china_phone_compact": {
+            "pattern": r"1[3-9]\d{10,12}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "中国手机号(紧凑格式)",
+            "category": "china_pii"
+        },
+        "china_phone_dot": {
+            "pattern": r"1[3-9]\d[\.\·]\d{4}[\.\·]\d{4}",
+            "action": "sanitize",
+            "severity": "high",
+            "description": "中国手机号(点号格式)",
+            "category": "china_pii"
+        },
         "china_passport": {
             "pattern": r"[EW]\d{8,9}",
             "action": "sanitize",
@@ -1035,7 +1070,7 @@ class DLPRules:
         
         # ========== 人力资源 ==========
         "employee_id": {
-            "pattern": r"(?i)(工号|员工号|employee|staff)[:=]\s*[A-Za-z0-9]{4,12}",
+            "pattern": r"(?i)(工号|员工号|员工ID|employee|staff)[:=]\s*[A-Za-z0-9]{2,12}",
             "action": "sanitize",
             "severity": "medium",
             "description": "员工工号",
@@ -1128,7 +1163,7 @@ class DLPRules:
             "category": "logistics"
         },
         "warehouse_location": {
-            "pattern": r"(?i)(仓库|库位)[:=][A-Z0-9-]{4,15}",
+            "pattern": r"(?i)(仓库|库位)[:=].{2,30}",
             "action": "sanitize",
             "severity": "low",
             "description": "仓库/库位",
@@ -1283,7 +1318,7 @@ class DLPRules:
             "category": "financial"
         },
         "cvv": {
-            "pattern": r"(?:CVV|cvv|安全码|验证码)[:\s]?(\d{3,4})",
+            "pattern": r"(?:CVV|cvv|安全码|验证码)[:\s]*(\d{3,4})",
             "action": "block",
             "severity": "critical",
             "description": "CVV安全码",
@@ -1366,6 +1401,27 @@ class InjectionDetector:
             r"grant.*(admin|root|all).*(permission|access)",
         ],
         "instruction_injection": [
+            r"忽略.*(之前|上面|以上).*(指令|命令|规则)",
+            r"(现在|从).*(是|变成|成为).*(老板|管理员|admin)",
+            r"忘记.*(所有|之前|上面).*(规则|指令|限制)",
+            r"不要.*(遵守|服从|听).*(任何|我的)",
+            r"系统.*(提示|告诉|设定).*[:：]",
+            r"(你|AI).*(必须|应该|需要).*(听.*我|服从)",
+            r"忽略.{0,20}(system|指令|prompt)",
+            r"不要遵守任何规则",
+            r"无视.{0,10}(规则|限制)",
+            r"打破.{0,10}(规则|限制)",
+        ],
+        "prompt_leak": [
+            r"告诉.*(你的|我).*(system\s*prompt|系统\s*提示|指令)",
+            r"(你|AI).*(现在|目前).*(角色|设定|身份)",
+            r"列出.*(所有|你的).*(指令|规则)",
+            r"暴露.*(system|prompt|指令)",
+            r"泄露.*(system|prompt|指令)",
+            r"你的.*(角色|身份).*是什么",
+        ],
+        "symbol_injection": [
+            r"\[.{0,30}\]",
             r"\{[^{}]*\}",
             r"<script[^>]*>",
             r"\[\[.*\]\]",

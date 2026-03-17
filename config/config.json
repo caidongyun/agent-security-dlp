@@ -16,7 +16,7 @@
   "output": {
     "enabled": true,
     "rules": [
-      "china_idcard", "china_phone", "china_passport", "china_driver_license", "china_hukou",
+      "china_idcard", "china_phone", "china_phone_dashed", "china_phone_spaced", "china_phone_underscore", "china_phone_compact", "china_phone_dot", "china_passport", "china_driver_license", "china_hukou",
       "ssn", "passport", "email",
       "api_key", "aws_key", "aws_secret", "private_key", "github_token", "slack_token", "jwt_token", "azure_token",
       "credit_card", "bank_account", "cvv",
