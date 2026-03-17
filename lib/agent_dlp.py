@@ -351,6 +351,20 @@ class DLPRules:
             "description": "钱包助记词",
             "category": "crypto"
         },
+        "ltc_address": {
+            "pattern": r"[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}",
+            "action": "block",
+            "severity": "high",
+            "description": "莱特币地址",
+            "category": "crypto"
+        },
+        "xrp_address": {
+            "pattern": r"r[1-9A-HJ-NP-Za-km-z]{24,34}",
+            "action": "block",
+            "severity": "high",
+            "description": "瑞波币地址",
+            "category": "crypto"
+        },
         
         # ========== 通讯服务 ==========
         "twilio_account_sid": {
@@ -492,6 +506,20 @@ class DLPRules:
             "action": "sanitize",
             "severity": "high",
             "description": "Slack Signing Secret",
+            "category": "credential"
+        },
+        "telegram_token": {
+            "pattern": r"TG\d{8,10}:[A-Za-z0-9_-]{30,}",
+            "action": "block",
+            "severity": "critical",
+            "description": "Telegram Bot Token",
+            "category": "credential"
+        },
+        "discord_token": {
+            "pattern": r"[MN][A-Za-z0-9]{24,}\.[A-Za-z0-9]{6}\.[A-Za-z0-9_-]{27}",
+            "action": "block",
+            "severity": "critical",
+            "description": "Discord Token",
             "category": "credential"
         },
         

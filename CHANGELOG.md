@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 2026-03-17
+
+### Added
+- **166 条规则** - 新增 4 条测试通过的规则
+- **加密货币扩展**: 莱特币地址 (ltc_address)、瑞波币地址 (xrp_address)
+- **新凭证**: Telegram Bot Token、Discord Token
+
+### Fixed
+- 配置文件更新，确保新规则生效
+
+---
+
 ## [2.1.0] - 2026-03-17
 
 ### Added
