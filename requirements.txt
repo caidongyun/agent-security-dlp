@@ -3,7 +3,10 @@
 # Core
 Python >= 3.8
 
-# No external dependencies required
+# Type checking
+mypy >= 1.0
+
+# No other external dependencies required
 # Uses only built-in libraries:
 # - re (regular expressions)
 # - json
