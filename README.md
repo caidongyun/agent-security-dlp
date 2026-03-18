@@ -1,7 +1,7 @@
 # Agent Security DLP
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v2.1.1-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-v2.1.3-blue" alt="Version">
   <img src="https://img.shields.io/badge/rules-166-green" alt="Rules">
   <img src="https://img.shields.io/badge/python-3.8+-orange" alt="Python">
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
