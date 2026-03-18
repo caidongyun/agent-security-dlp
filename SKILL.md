@@ -1,5 +1,6 @@
 ---
 name: agent-security-dlp
+version: 2.1.4
 description: |
   Agent Security DLP - 企业级数据防泄漏系统
   功能: 入口防护、记忆保护、工具管控、出口过滤、审计日志
